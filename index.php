@@ -25,22 +25,17 @@
     </style>
     <body> 
         <div class="caja">
-            <select onChange="mostrarResultados(this.value);">
-                <?php
-                    for($i=2000;$i<2020;$i++){
-                        if($i == 2014){
-                            echo '<option value="'.$i.'" selected>'.$i.'</option>';
-                        }else{
-                            echo '<option value="'.$i.'">'.$i.'</option>';
-                        }
-                    }
-                ?>
+            <select onChange="mostrarResultados(this.value);" id="año">
+                <!-- se carga por AJAX mediante la funcion load desde controlador/procesar.php -->
             </select>
         </div>
         <div class="resultados"><canvas id="grafico"></canvas></div>
     </body>
     <script>
-            $(document).ready(mostrarResultados(2015));  
+            $(document).ready(mostrarResultados(2014)); 
+
+                $( "#año" ).load( "controlador/procesar.php?consulta_años" );
+
                 function mostrarResultados(año){
                     $.ajax({
                         type:'POST',
